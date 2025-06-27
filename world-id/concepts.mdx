@@ -1,3 +1,7 @@
+---
+title: "Core Concepts"
+---
+
 # Core Concepts
 
 World ID is built for easy integration, but here are a few core concepts that are helpful to understand before you start.
@@ -8,62 +12,13 @@ World ID is built for easy integration, but here are a few core concepts that ar
 
 World ID supports multiple "Verification Levels" to prove that a person is a unique human. These levels provide different degrees of humanness assurance, accessibility, and protection against fraud.
 
-<div className="space-y-4 mt-4">
-  <div className="flex items-start gap-4 p-4 rounded-lg border border-gray-200">
-    <img src="/icons/credential-face.svg" alt="Orb+" className="w-10 h-10 flex-shrink-0 mt-1" />
-    <div className="flex-grow">
-      <div className="flex items-center gap-4 mb-1">
-        <span className="font-semibold">Orb+</span>
-        <span className="text-sm text-gray-600">Very Strong</span>
-      </div>
-      <p className="text-sm text-gray-700">[Coming soon] Orb verification, plus authentication which verifies the person using World ID is the legitimate holder.</p>
-    </div>
-  </div>
-  
-  <div className="flex items-start gap-4 p-4 rounded-lg border border-gray-200">
-    <img src="/icons/credential-orb.svg" alt="Orb" className="w-10 h-10 flex-shrink-0 mt-1" />
-    <div className="flex-grow">
-      <div className="flex items-center gap-4 mb-1">
-        <span className="font-semibold">Orb</span>
-        <span className="text-sm text-gray-600">Strong</span>
-      </div>
-      <p className="text-sm text-gray-700">Biometric verification, uniqueness through iris (<a href="https://world.org/blog/engineering/opening-orb-look-inside-worldcoin-biometric-imaging-device" className="text-blue-600 hover:underline">details</a>).</p>
-    </div>
-  </div>
-  
-  <div className="flex items-start gap-4 p-4 rounded-lg border border-gray-200">
-    <img src="/icons/credential-passport-nfc.svg" alt="Secure Document" className="w-10 h-10 flex-shrink-0 mt-1" />
-    <div className="flex-grow">
-      <div className="flex items-center gap-4 mb-1">
-        <span className="font-semibold">Secure Document</span>
-        <span className="text-sm text-gray-600">High</span>
-      </div>
-      <p className="text-sm text-gray-700">Document verification eg. Passport with security chip verification</p>
-    </div>
-  </div>
-  
-  <div className="flex items-start gap-4 p-4 rounded-lg border border-gray-200">
-    <img src="/icons/credential-passport.svg" alt="Document" className="w-10 h-10 flex-shrink-0 mt-1" />
-    <div className="flex-grow">
-      <div className="flex items-center gap-4 mb-1">
-        <span className="font-semibold">Document</span>
-        <span className="text-sm text-gray-600">High</span>
-      </div>
-      <p className="text-sm text-gray-700">Document verification eg. Passport</p>
-    </div>
-  </div>
-  
-  <div className="flex items-start gap-4 p-4 rounded-lg border border-gray-200">
-    <img src="/icons/credential-phone.svg" alt="Device" className="w-10 h-10 flex-shrink-0 mt-1" />
-    <div className="flex-grow">
-      <div className="flex items-center gap-4 mb-1">
-        <span className="font-semibold">Device</span>
-        <span className="text-sm text-gray-600">Medium</span>
-      </div>
-      <p className="text-sm text-gray-700">Unique mobile device check.</p>
-    </div>
-  </div>
-</div>
+| Verification Level                                                                                                                                                                              | <span className="whitespace-nowrap">Humanness Level</span> | Description                                                                                                                                                 |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <div className="flex items-center gap-2"><img src="/icons/credential-face.svg" alt="Orb+" className="w-6 h-6" /><span className="font-semibold">Orb+</span></div>                               | Very Strong                                                | [Coming soon] Orb verification, plus authentication which verifies the person using World ID is the legitimate holder.                                      |
+| <div className="flex items-center gap-2"><img src="/icons/credential-orb.svg" alt="Orb" className="w-6 h-6" /><span className="font-semibold">Orb</span></div>                                  | Strong                                                     | Biometric verification, uniqueness through iris ([details](https://world.org/blog/engineering/opening-orb-look-inside-worldcoin-biometric-imaging-device)). |
+| <div className="flex items-center gap-2"><img src="/icons/credential-passport-nfc.svg" alt="Secure Document" className="w-6 h-6" /><span className="font-semibold">Secure Document</span></div> | High                                                       | Document verification eg. Passport with security chip verification                                                                                          |
+| <div className="flex items-center gap-2"><img src="/icons/credential-passport.svg" alt="Document" className="w-6 h-6" /><span className="font-semibold">Document</span></div>                   | High                                                       | Document verification eg. Passport                                                                                                                          |
+| <div className="flex items-center gap-2"><img src="/icons/credential-phone.svg" alt="Device" className="w-6 h-6" /><span className="font-semibold">Device</span></div>                          | Medium                                                     | Unique mobile device check.                                                                                                                                 |
 
 ## Vocabulary
 
@@ -75,8 +30,9 @@ Some terms are used throughout the World ID documentation. Here are a few of the
 - **Zero-Knowledge Proof (ZKP)**: A cryptographic method to prove that a statement is true without revealing any information about the statement itself. World ID uses ZKPs to prove that a user is verified without revealing the user's identity.
 - **Nullifier Hash**: A component of the World ID ZKP; a unique identifier for a combination of a user, `app_id`, and `action`.
 - **Signal**: A component of the World ID ZKP; data attached to the proof that cannot be tampered with. An example may be a user's choice for an election.
-- **Merkle Root**: A component of the World ID ZKP; The root of the [Merkle Tree](https://en.wikipedia.org/wiki/Merkle_tree) that identity commitments are inserted to.  
+- **Merkle Root**: A component of the World ID ZKP; The root of the [Merkle Tree](https://en.wikipedia.org/wiki/Merkle_tree) that identity commitments are inserted to.
 
 It's important to note the difference between the two types of verification, depending on the context:
-- **Orb/Passport Verification**: A user's identity can be verified through either an Orb, Device or Passport and their identity commitment is then recorded on the blockchain. 
+
+- **Orb/Passport Verification**: A user's identity can be verified through either an Orb, Device or Passport and their identity commitment is then recorded on the blockchain.
 - **Proof Verification**: The process of validating a user's Zero-Knowledge Proof (ZKP) either off-chain via a REST endpoint we host or on-chain using our Smart Contracts.
