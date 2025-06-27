@@ -1,71 +1,34 @@
 ---
-title: Introduction
-description: "Welcome to the home of your new documentation"
+title: World Developer Docs
+description: "Choose your integration path"
 ---
 
-<img
-  className="block dark:hidden"
-  src="/images/hero-light.png"
-  alt="Hero Light"
-/>
-<img
-  className="hidden dark:block"
-  src="/images/hero-dark.png"
-  alt="Hero Dark"
-/>
+Choose your integration path:
 
-## Setting up
+- **Mini Apps** - Build native-like applications that run inside World App with the most distribution, leveraging World ID and the wallet.
+- **External Integrations** - Add World ID's proof-of-personhood verification to your existing platform.
+- **World Chain** - Build directly on our blockchain infrastructure.
 
-The first step to world-class documentation is setting up your editing environments.
-
-<CardGroup cols={2}>
-  <Card
-    title="Edit Your Docs"
-    icon="pen-to-square"
-    href="https://mintlify.com/docs/quickstart"
-  >
-    Get your docs set up locally for easy development
-  </Card>
-  <Card
-    title="Preview Changes"
-    icon="image"
-    href="https://mintlify.com/docs/development"
-  >
-    Preview your changes before you push to make sure they're perfect
-  </Card>
-</CardGroup>
-
-## Make it yours
-
-Update your docs to your brand and add valuable content for the best user conversion.
-
-<CardGroup cols={2}>
-  <Card
-    title="Customize Style"
-    icon="palette"
-    href="https://mintlify.com/docs/settings/global"
-  >
-    Customize your docs to your company's colors and brands
-  </Card>
-  <Card
-    title="Reference APIs"
-    icon="code"
-    href="https://mintlify.com/docs/api-playground/openapi"
-  >
-    Automatically generate endpoints from an OpenAPI spec
-  </Card>
-  <Card
-    title="Add Components"
-    icon="screwdriver-wrench"
-    href="https://mintlify.com/docs/content/components/accordions"
-  >
-    Build interactive features and designs to guide your users
-  </Card>
-  <Card
-    title="Get Inspiration"
-    icon="stars"
-    href="https://mintlify.com/customers"
-  >
-    Check out our showcase of our favorite documentation
-  </Card>
-</CardGroup>
+<div className="grid gap-4 md:grid-cols-3 mt-6">
+  <a href="/mini-apps" className="block group">
+    <div className="rounded-lg border border-gray-200 hover:border-gray-300 transition-colors p-6">
+      <img src="/images/docs/mini-apps-cover.png" alt="Mini Apps" className="w-full h-40 object-cover rounded mb-4" />
+      <h3 className="font-semibold text-lg mb-2 group-hover:text-blue-600">Create a Mini App</h3>
+      <p className="text-gray-600 text-sm">Native like applications integrated in World App</p>
+    </div>
+  </a>
+  <a href="/world-id" className="block group">
+    <div className="rounded-lg border border-gray-200 hover:border-gray-300 transition-colors p-6">
+      <img src="/images/docs/world-id-cover.png" alt="World ID" className="w-full h-40 object-cover rounded mb-4" />
+      <h3 className="font-semibold text-lg mb-2 group-hover:text-blue-600">External integrations</h3>
+      <p className="text-gray-600 text-sm">Add World ID verification to your existing platform</p>
+    </div>
+  </a>
+  <a href="/world-chain" className="block group">
+    <div className="rounded-lg border border-gray-200 hover:border-gray-300 transition-colors p-6">
+      <img src="/images/docs/worldchain-cover.png" alt="World Chain" className="w-full h-40 object-cover rounded mb-4" />
+      <h3 className="font-semibold text-lg mb-2 group-hover:text-blue-600">Integrate World Chain</h3>
+      <p className="text-gray-600 text-sm">A chain designed for real humans.</p>
+    </div>
+  </a>
+</div>

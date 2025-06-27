@@ -1,0 +1,108 @@
+# IDKit
+
+:::note
+IDKit is open source and accepts contributions! Head over to [GitHub](https://github.com/worldcoin/idkit-js) and submit a pull request.
+:::
+
+There are three packages available in the IDKit Monorepo: `@worldcoin/idkit`, `@worldcoin/idkit-standalone`, and `@worldcoin/idkit-core`. The `@worldcoin/idkit` package is the main package that should be used with the React JS framework. The `@worldcoin/idkit-standalone` package is a standalone package that can be used in vanilla JavaScript applications. The `@worldcoin/idkit-core` package is a core functionality package that is used by the other two packages, and should be used only when creating a new IDKit package.
+
+## IDKit (React)
+
+The `@worldcoin/idkit` package is the main package that should be used with the [React framework](https://react.dev/) or any other framework that supports React components, such as [Next.JS](https://nextjs.org/).
+
+### Components
+
+#### `IDKitWidget`
+
+The `IDKitWidget` component is the main component that renders the World ID widget. It should be mounted in your React app and passed the relevant parameters. Accepts a function as a child that receives an `open` function to open the widget.
+
+```jsx
+import { IDKitWidget } from '@worldcoin/idkit'
+
+<IDKitWidget
+	app_id="app_GBkZ1KlVUdFTjeMXKlVUdFT" // obtained from the Developer Portal
+	action="vote_1" // this is your action name from the Developer Portal
+	signal="user_value" // any arbitrary value the user is committing to, e.g. a vote
+	onSuccess={onSuccess}
+	verification_level="device" // minimum verification level accepted, defaults to "orb"
+>
+	{({ open }) => <button onClick={open}>Verify with World ID</button>}
+</IDKitWidget>
+```
+
+### Parameters
+
+The following parameters can be passed as props to the `IDKitWidget` component:
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `app_id` | `string` | **Yes** | - | Unique identifier for the app verifying the action. This should be the App ID obtained from the [Developer Portal](https://developer.worldcoin.org). |
+| `action` | `string` | **Yes** | - | Identifier for the action the user is performing. This should be the action name set in the Developer Portal. |
+| `onSuccess` | `function(ISuccessResult)` | **Yes** | - | Function to trigger when verification is successful and the modal is closed. Should receive a single parameter of type `ISuccessResult` which contains [the proof details.](#response) |
+| `handleVerify` | `function(ISuccessResult)` | No | - | Called after the proof is returned from the user's identity wallet (e.g. World App), but before showing the success screen. Should receive a single parameter of type `ISuccessResult` which contains [the proof details.](#response) Throwing an error in this screen will show the user a custom error.<br/><br/>**Note:** `handleVerify` should be used for API proof verifications to create the best user experience. This will show a pending state while the proof is verified and present any errors thrown in a user-readable fashion. |
+| `onError` | `function(IErrorState)` | No | - | Called when IDKit is closed after an error. Should receive a single parameter of type `IErrorState` which contains [the error details.](#error-handling) |
+| `verification_level` | `string` | No | `"orb"` | The minimum verification level accepted. Can be `orb` or `device`. Defaults to `orb`. **TypeScript apps can use the `VerificationLevel` enum.** |
+| `signal` | `string` | No | `""` | The signal to be included in the zero-knowledge proof. Typically used for on-chain actions, read more in [the On-chain section](/world-id/id/on-chain). |
+| `bridge_url` | `string` | No | `"https://bridge.worldcoin.org"` | The URL of the [Wallet Bridge](https://github.com/worldcoin/wallet-bridge) to use for establishing a connection between IDKit and the user's World ID Wallet. Defaults to the bridge service hosted by Worldcoin. **Only change this if you are running your own bridge service.** Read more in [Protocol Internals](/world-id/further-reading/protocol-internals#wallet-bridge).<br/><br/>**Warning:** World App will temporarily prevent users from connecting to a Wallet Bridge that is not hosted by Worldcoin or Tools for Humanity while security reviews are ongoing, so we **recommend using the default value** by leaving the `bridge_url` parameter undefined. |
+| `autoClose` | `boolean` | No | `true` | Whether to automatically close the widget after completion. Defaults to `true`. |
+| `advanced` | `JSON` | No | - | A JSON object containing advanced configuration options that may be unstable or subject to change. See [Advanced Configuration](#advanced-configuration) for more details. |
+
+### Hooks
+
+#### `useIDKit`
+
+The `useIDKit` hook allows you to programmatically open the IDKit widget without mounting any buttons on screen. Note that you still need to mount the component for this to work.
+
+```jsx
+import { IDKitWidget, useIDKit } from '@worldcoin/idkit'
+
+const { open, setOpen } = useIDKit()
+
+useEffect(() => {
+	setOpen(true)
+}, [])
+
+return (
+	<div>
+		<IDKitWidget app_id="..." action="..." />
+	</div>
+)
+```
+
+#### `useSession`
+
+The `useSession` hook provides a React-friendly way to handle World ID verification sessions with full control over the UI. It automatically manages session creation and polling for verification updates.
+
+```jsx 
+import { useSession, VerificationState } from '@worldcoin/idkit'
+
+const { status, sessionURI, result, errorCode, reset } = useSession({
+	app_id: 'app_staging_12345',
+	action: 'login',
+	signal: 'user_123',
+})
+
+if (status === VerificationState.WaitingForConnection && sessionURI) {
+	return <QRCodeSVG value={sessionURI} />
+}
+
+if (status === VerificationState.Confirmed && result) {
+	return <div>Verification successful!</div>
+}
+```
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `config` | `UseSessionConfig` | **Yes** | Same configuration options as IDKitWidget |
+
+**Returns (UseSessionResult):**
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `status` | `VerificationState` | Current verification state |
+| `sessionURI` | `string \| null` | QR code URI for users to scan |
+| `result` | `ISuccessResult \| null` | Verification result if successful |
+| `errorCode` | `AppErrorCodes \| null` | Error code if verification failed |
+| `reset` | `() => void` | Function to reset the session |

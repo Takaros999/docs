@@ -1,0 +1,44 @@
+# Errors
+
+This page acts as a reference for the error codes returned by IDKit, the Developer Portal API, and the Wallet Bridge.
+
+## IDKit
+
+These error codes are returned in the `onError` callback. The source described if the error originates from within IDKit or the Wallet Bridge response.
+
+| Code | Source | Description | How to fix? |
+|------|--------|-------------|-------------|
+| `failed_by_host_app` | IDKit | An error was thrown in the `handleVerify` callback. | Assess the error thrown in your `handleVerify` callback and resolve the issue. |
+| `connection_failed` | IDKit | Could not establish a connection to World App. | Ask the user to check their internet connection on both devices running your application and World App. Additionally, make sure the user has the latest version of World App. |
+| `verification_rejected` | Wallet Bridge | User rejected the World ID request in World App. | If this was a mistake, ask the user to go through the flow again. |
+| `max_verifications_reached` | Wallet Bridge | This person has already verified for this particular action the maximum number of times allowed. | Nothing to do. User cannot verify for this action again. |
+| `credential_unavailable` | Wallet Bridge | This user does not have the requested credential. | The user must verify at the Orb or verify their unique device in World App to receive the credential required. |
+| `malformed_request` | Wallet Bridge | The request payload couldn't be decrypted or did not conform to the standard. | Ensure IDKit is configured properly and all parameters are valid. See [above](#id-kit-react) for configuration details. |
+| `invalid_network` | Wallet Bridge | The application is configured for a different environment than the verifying user's client. | Ensure you use the [Worldcoin Simulator](https://simulator.worldcoin.org) for Staging applications and World App for Production applications. |
+| `inclusion_proof_failed` | Wallet Bridge | The sequencer returned an unexpected error when retrieving the inclusion proof. | Ask the user to try again. This may be due to a temporary network issue, or a bug with World App or the Signup Sequencer. |
+| `inclusion_proof_pending` | Wallet Bridge | The user might have the requested credential, but it is not available on-chain yet. It might be available for API verification. | Ask the user to verify again in approximately one hour. |
+| `metadata_failed` | Wallet Bridge | Unable to load metadata for the app from the Developer Portal. | Ensure your `app_id` is configured correctly in IDKit and exactly matches the `app_id` from the Developer Portal. |
+| `unexpected_response` | IDKit | There was a problem with the response obtained from the WLD app. | Check the JS console for further details, though in most cases these will require contacting us to report the bug. |
+| `generic_error` | Wallet Bridge or IDKit | An unhandled exception occurred. | Check the JS console for further details, though in most cases these will require contacting us to report the bug. |
+
+## Developer Portal API
+
+These error codes are returned in the `error` property of the response body.
+
+| Code | Description | How to fix? |
+|------|-------------|-------------|
+| `required` | The attribute named in the `attribute` property is required, but was not included in the request. | Provide the required attribute in your API request. |
+| `invalid_format` | The attribute named in the `attribute` property was provided, but was in an unexpected format. | See the error message for the proper format. |
+| `unauthenticated` | The credentials (if provided) were invalid. | Provide the required credentials in your API request and ensure they are correct. |
+| `permission_denied` | The credentials provided were valid, but you do not have the required permissions. | Contact your Developer Portal team's owner to be granted permissions, or the Worldcoin team if you are unable to resolve the issue. |
+| `max_verifications_reached` | This person has already verified for this particular action the maximum number of times allowed. | Nothing to do. User cannot verify for this action again. |
+| `invalid_proof` | The provided proof is invalid and it cannot be verified. | Ensure your `app_id`, `action`, `signal`, and `verification_level` are unchanged between the proof request and proof verification. |
+| `invalid_merkle_root` | The merkle root provided is not recognized. | Ask the user to generate a new proof, the existing proof may be stale. |
+| `invalid_network` | The application is configured for a different environment than the verifying user's client. | Ensure you use the [Worldcoin Simulator](https://simulator.worldcoin.org) for Staging applications and World App for Production applications. |
+| `invalid_engine` | The application is configured for on-chain verification and cannot be verified via API. | Either verify the proof on-chain or create a new application configured for Cloud verifications. |
+| `metadata_failed` | Unable to load metadata for the app from the Developer Portal. | Ensure your `app_id` is configured correctly in IDKit and exactly matches the `app_id` from the Developer Portal. |
+| `action_inactive` | The requested action is disabled in the Developer Portal. | Enable the action or create a new action. |
+| `verification_error` | The Developer Portal faced an internal error verifying the proof. | Contact the Worldcoin team. |
+| `internal_error` | The Developer Portal faced an internal error verifying the proof. | Contact the Worldcoin team. |
+| `unexpected_response` | There was a problem with the response obtained from the WLD app. | Check the JS console for further details, though in most cases these will require contacting us to report the bug. |
+| `generic_error` | An unhandled exception occurred. | Check the JS console for further details, though in most cases these will require contacting us to report the bug. |

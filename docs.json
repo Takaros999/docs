@@ -1,55 +1,65 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "World Documentation",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#000000",
+    "light": "#4B5563",
+    "dark": "#000000"
   },
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Overview",
         "groups": [
           {
             "group": "Get Started",
             "pages": [
-              "index",
-              "quickstart",
-              "development"
-            ]
-          },
-          {
-            "group": "Essentials",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              "index"
             ]
           }
         ]
       },
       {
-        "tab": "API Reference",
+        "tab": "World ID",
         "groups": [
           {
-            "group": "API Documentation",
+            "group": "Introduction",
             "pages": [
-              "api-reference/introduction"
+              "world-id/index",
+              "world-id/concepts"
             ]
           },
           {
-            "group": "Endpoint Examples",
+            "group": "ID Kit",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "world-id/id/getting-started",
+              "world-id/id/web-react",
+              "world-id/id/web-vanilla",
+              "world-id/id/mobile",
+              "world-id/id/cloud",
+              "world-id/id/on-chain",
+              "world-id/id/libraries",
+              "world-id/id/testing"
+            ]
+          },
+          {
+            "group": "Sign in with World ID",
+            "pages": [
+              "world-id/sign-in/getting-started",
+              "world-id/sign-in/oidc"
+            ]
+          },
+          {
+            "group": "Technical Reference",
+            "pages": [
+              "world-id/reference/idkit",
+              "world-id/reference/api",
+              "world-id/reference/sign-in",
+              "world-id/reference/contracts",
+              "world-id/reference/contract-deployments",
+              "world-id/reference/errors"
             ]
           }
         ]
@@ -58,45 +68,40 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "Discord",
+          "href": "https://discord.gg/worldcoin",
+          "icon": "discord"
         },
         {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "GitHub",
+          "href": "https://github.com/worldcoin",
+          "icon": "github"
         }
       ]
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/world-logo.svg",
+    "dark": "/logo/world-logo-white.svg"
   },
   "navbar": {
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:support@worldcoin.org"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Developer Portal",
+      "href": "https://developer.worldcoin.org"
     }
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/worldcoin",
+      "github": "https://github.com/worldcoin",
+      "discord": "https://discord.gg/worldcoin"
     }
   }
 }

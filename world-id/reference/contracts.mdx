@@ -1,0 +1,137 @@
+# Smart Contracts
+
+All of our smart contracts are available on GitHub:
+
+- [World ID Smart Contracts](https://github.com/worldcoin/world-id-contracts)
+- [State Bridge Smart Contracts](https://github.com/worldcoin/world-id-state-bridge)
+
+<Note>
+If you're interested in using World ID and verifying proofs on-chain, see our [On-Chain Verification guide](/world-id/id/on-chain).
+</Note>
+
+## Supported Chains
+
+| Chain | Testnet | Role | Identity Availability |
+|-------|---------|------|-----------------------|
+| ![Ethereum](/icons/ethereum.svg) **Ethereum** | Sepolia | Canonical | ~60 minutes after verification |
+| ![Optimism](/icons/optimism.svg) **Optimism** | Optimism Sepolia | Bridged | ~5 Minutes after Ethereum |
+| ![Polygon](/icons/polygon.svg) **Polygon** | N/A | Bridged | ~40 Minutes after Ethereum |
+| ![Base](/icons/base.svg) **Base (Testnet Only)** | Base Sepolia | Bridged | ~5 Minutes after Ethereum Sepolia |
+
+<Note>Find our smart contract [address book here](/world-id/reference/address-book).</Note>
+
+## Architecture
+
+This section offers a high-level overview of the various smart contracts that make up World ID. This structure (including state bridging) is replicated on testnets -- currently Sepolia, Optimism Sepolia, and Base Sepolia.
+
+### Identity Managers: `WorldIdIdentityManager`
+
+Identity Managers are only deployed on Ethereum. The Identity Manager contracts are responsible for managing the Semaphore instance. Worldcoin's signup sequencers call the Identity Manager contracts to add or remove identities from the merkle tree.
+
+### State Bridges: `OpStateBridge`/`PolygonStateBridge`
+
+One State Bridge contract is deployed on Ethereum for each bridged chain. It publishes the root of the merkle tree to its configured chain's World ID contract, allowing proofs to be verified on that chain.
+
+### Bridged World ID: `OpWorldId`/`PolygonWorldId`
+
+One World ID contract is deployed on each bridged chain, with an associated State Bridge contract on Ethereum. It is responsible for receiving merkle roots from its State Bridge contract, and verifying World ID proofs against those roots.
+
+<Note>You can deploy your own State Bridge contract on Ethereum and Bridged World ID contract to any chain to bridge World ID to that chain permissionlessly.</Note>
+
+### World ID Router: `WorldIdRouter`
+
+**This is the contract you should interact with.** 
+
+The World ID Router will route your call to the correct Identity Manager contract (Ethereum) or World ID contract (L2 Chains) based on the `groupId` argument. This contract is proxied, so you will not need to update your code if the underlying contracts are upgraded.
+
+<Note>Only Orb credentials are supported on-chain, so the `groupId` must be `1`.</Note>
+
+## Usage
+
+The `verifyProof` method of the **World ID Router** is used to verify proofs on-chain.
+
+### Arguments
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `root` | `uint256` | **Yes** | The World ID root to verify against. |
+| `groupId` | `uint256` | **Yes** | Determines which Credential Type to verify against. As only Orb credentials are supported on-chain, this must be `1`. |
+| `signalHash` | `uint256` | **Yes** | The `keccak256` hash of the signal to verify. |
+| `nullifierHash` | `uint256` | **Yes** | The root of the merkle tree to verify against. This is obtained from the IDKit widget as a hex string `nullifier_hash`, and must be converted to a `uint256` before passing it to the `verifyProof` method. |
+| `externalNullifierHash` | `uint256` | **Yes** | The `keccak256` hash of the `externalNullifier` to verify. The `externalNullifier` is computed from the `app_id` and `action`. |
+| `proof` | `uint256[8]` | **Yes** | The zero-knowledge proof to verify. This is obtained from the IDKit widget as a hex string `proof`, and must be converted to a `uint256[8]` before passing it to the `verifyProof` method. |
+
+#### Example: groupId
+```solidity title="Orb-Only groupId"
+uint256 internal immutable groupId = 1;
+```
+
+#### Example: signalHash
+```solidity title="signalHash"
+abi.encodePacked(signal).hashToField();
+```
+
+#### Example: externalNullifierHash
+```solidity title="externalNullifierHash"
+externalNullifier = abi.encodePacked(abi.encodePacked(appId).hashToField(), action)
+externalNullifierHash = externalNullifier.hashToField();
+```
+
+<Note>Read more about the External Nullifier in [Protocol Internals](/world-id/further-reading/protocol-internals#external-nullifier).</Note>
+
+#### Example: Unpacking Proof
+
+<CodeGroup>
+```ts title="viem"
+import { decodeAbiParameters } from 'viem'
+
+const unpackedProof = decodeAbiParameters([{ type: 'uint256[8]' }], proof)[0]
+```
+
+```ts title="ethers.js"
+import { defaultAbiCoder as abi } from '@ethers/utils'
+
+const unpackedProof = abi.decode(['uint256[8]'], proof)[0]
+```
+</CodeGroup>
+
+### Sybil resistance
+
+While the World ID protocol makes it very easy to make your contracts sybil resistant, this takes a little more than just calling the `verifyProof` function. To make your contract sybil-resistant, you'll need to do the following:
+
+- Store the `nullifierHash` of each user that has successfully verified a proof.
+- When a user attempts to verify a proof, check that the `nullifierHash` is not already in the list of used `nullifierHash`es.
+
+Here's an example function doing the above. You can also use the [World ID starter kits](/world-id/id/on-chain) to get started with sybil resistance.
+
+```solidity
+/// @param root The root (returned by the IDKit widget).
+/// @param groupId The group ID 
+/// @param signal An arbitrary input from the user, usually the user's wallet address
+/// @param nullifierHash The nullifier hash for this proof, preventing double signaling (returned by the IDKit widget).
+/// @param proof The zero-knowledge proof that demonstrates the claimer is registered with World ID (returned by the IDKit widget).
+function verifyAndExecute(
+    address signal,
+    uint256 root,
+    uint256 nullifierHash,
+    uint256[8] calldata proof
+) public {
+    // First make sure this person hasn't done this before
+    if (nullifierHashes[nullifierHash]) revert InvalidNullifier();
+
+    // Verify the provided proof is valid and the user is verified by World ID
+    worldId.verifyProof(
+        root,
+        groupId,
+        abi.encodePacked(signal).hashToField(),
+        nullifierHash,
+        externalNullifierHash,
+        proof
+    );
+
+    // Record the user has done this, so they can't do it again (sybil-resistance)
+    nullifierHashes[nullifierHash] = true;
+
+    // Finally, execute your logic here, for example issue a token, NFT, etc...
+}
+```
