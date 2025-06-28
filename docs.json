@@ -15,8 +15,115 @@
         "groups": [
           {
             "group": "Get Started",
+            "pages": ["index"]
+          }
+        ]
+      },
+      {
+        "tab": "Mini Apps",
+        "groups": [
+          {
+            "group": "Introduction",
+            "pages": ["mini-apps/index"]
+          },
+          {
+            "group": "Quick Start",
             "pages": [
-              "index"
+              "mini-apps/quick-start/installing",
+              "mini-apps/quick-start/commands",
+              "mini-apps/quick-start/responses",
+              "mini-apps/quick-start/testing",
+              "mini-apps/quick-start/app-store"
+            ]
+          },
+          {
+            "group": "Authentication",
+            "pages": ["mini-apps/authentication/wallet-auth"]
+          },
+          {
+            "group": "Commands",
+            "pages": [
+              "mini-apps/commands/verify",
+              "mini-apps/commands/pay",
+              "mini-apps/commands/wallet-auth",
+              "mini-apps/commands/send-transaction",
+              "mini-apps/commands/sign-message",
+              "mini-apps/commands/sign-typed-data",
+              "mini-apps/commands/share-contacts",
+              "mini-apps/commands/request-permission",
+              "mini-apps/commands/get-permissions",
+              "mini-apps/commands/send-haptic-feedback",
+              "mini-apps/commands/share"
+            ]
+          },
+          {
+            "group": "Technical Reference",
+            "pages": [
+              "mini-apps/reference/init",
+              "mini-apps/reference/api",
+              "mini-apps/reference/errors",
+              "mini-apps/reference/address-book",
+              "mini-apps/reference/usernames",
+              "mini-apps/reference/status-page",
+              "mini-apps/reference/payment-methods",
+              "mini-apps/reference/microphone"
+            ]
+          },
+          {
+            "group": "Growth Playbook",
+            "pages": [
+              "mini-apps/growth/index",
+              "mini-apps/growth/invites-viral",
+              "mini-apps/growth/gamification",
+              "mini-apps/growth/notifications",
+              "mini-apps/growth/analytics"
+            ]
+          },
+          {
+            "group": "Notifications",
+            "pages": [
+              "mini-apps/notifications/features-and-guidelines",
+              "mini-apps/notifications/how-to-send-notifications"
+            ]
+          },
+          {
+            "group": "Design Standards",
+            "pages": [
+              "mini-apps/design/app-guidelines",
+              "mini-apps/design/ui-kit"
+            ]
+          },
+          {
+            "group": "Quick Actions",
+            "pages": [
+              "mini-apps/sharing/quick-actions",
+              "mini-apps/sharing/add-money-qa",
+              "mini-apps/sharing/uno-qa",
+              "mini-apps/sharing/eggs-vault-qa",
+              "mini-apps/sharing/earn-wld-qa",
+              "mini-apps/sharing/dna-qa",
+              "mini-apps/sharing/sage-qa",
+              "mini-apps/sharing/vuni-qa",
+              "mini-apps/sharing/world-chat-qa",
+              "mini-apps/sharing/world-companies-finder-qa",
+              "mini-apps/sharing/one-pay-qa",
+              "mini-apps/sharing/puf-qa",
+              "mini-apps/sharing/orbital-x-qa"
+            ]
+          },
+          {
+            "group": "Further Reading",
+            "pages": [
+              "mini-apps/more/security",
+              "mini-apps/more/policy",
+              "mini-apps/more/promotion",
+              "mini-apps/more/grants",
+              "mini-apps/more/developer-rewards-pilot",
+              "mini-apps/more/troubleshooting",
+              "mini-apps/more/webview-spec",
+              "mini-apps/more/releases",
+              "mini-apps/more/community-tools-perks",
+              "mini-apps/more/faq"
             ]
           }
         ]
@@ -26,10 +133,7 @@
         "groups": [
           {
             "group": "Introduction",
-            "pages": [
-              "world-id/index",
-              "world-id/concepts"
-            ]
+            "pages": ["world-id/index", "world-id/concepts"]
           },
           {
             "group": "ID Kit",

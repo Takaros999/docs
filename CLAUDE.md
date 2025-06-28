@@ -205,3 +205,58 @@ Use the `focus` attribute to highlight important lines:
 ```jsx {3-7}
 // Important lines will be highlighted
 ```
+
+## Image and Media Best Practices
+
+### 1. Preserve Image Dimensions
+When migrating images with specific dimensions, convert them appropriately:
+
+**From Next.js Image component:**
+```jsx
+<Image src="/path/to/image.png" width={300} height={700} />
+```
+
+**To Mintlify HTML:**
+```html
+<img src="/path/to/image.png" alt="Description" width="300" height="700" />
+```
+
+**For styled images:**
+```html
+<img src="/path/to/image.png" alt="Description" style="max-width: 300px; height: auto;" />
+```
+
+### 2. Video Elements
+Always preserve width attributes on videos:
+```html
+<video width="300" autoPlay muted loop playsInline>
+  <source src="/path/to/video.mp4" type="video/mp4" />
+</video>
+```
+
+## Page Headers and Titles
+
+### Important: Avoid Duplicate Headers
+Mintlify automatically renders the frontmatter title as the page header. Do NOT include an H1 (`#`) at the beginning of the content.
+
+**Wrong:**
+```markdown
+---
+title: "Getting Started"
+---
+
+# Getting Started
+
+Content here...
+```
+
+**Correct:**
+```markdown
+---
+title: "Getting Started"
+---
+
+Content here...
+```
+
+If you need a different display title than the navigation title, you can use an H2 (`##`) for the first content heading.
