@@ -167,6 +167,117 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "World Chain",
+        "groups": [
+          {
+            "group": "About World Chain",
+            "pages": [
+              "world-chain/index",
+              "world-chain/quick-start/why",
+              "world-chain/quick-start/features",
+              "world-chain/quick-start/data"
+            ]
+          },
+          {
+            "group": "Using World Chain",
+            "pages": [
+              "world-chain/quick-start/index",
+              "world-chain/quick-start/fund-wallet",
+              "world-chain/quick-start/info"
+            ]
+          },
+          {
+            "group": "Building on World Chain",
+            "pages": [
+              "world-chain/developers/deploy",
+              "world-chain/developers/template",
+              "world-chain/developers/world-chain-contracts",
+              "world-chain/developers/fees",
+              "world-chain/developers/evm-equivalence",
+              {
+                "page": "Scaling World Chain",
+                "href": "https://world.org/blog/engineering/finding-scalable-home-for-worldcoin",
+                "external": true
+              },
+              "world-chain/developers/grants"
+            ]
+          },
+          {
+            "group": "Infrastructure Providers",
+            "pages": [
+              "world-chain/providers/nodes",
+              "world-chain/providers/bridges",
+              "world-chain/providers/data",
+              "world-chain/providers/explorers",
+              "world-chain/providers/developer-tooling",
+              "world-chain/providers/oracles",
+              "world-chain/providers/paymasters",
+              "world-chain/providers/onramps"
+            ]
+          },
+          {
+            "group": "Technical Reference",
+            "pages": [
+              "world-chain/reference/useful-contracts",
+              "world-chain/reference/node-setup"
+            ]
+          },
+          {
+            "group": "Tokens",
+            "pages": [
+              "world-chain/tokens/bridging",
+              "world-chain/tokens/superchain-token",
+              "world-chain/tokens/usdc"
+            ]
+          },
+          {
+            "group": "Status Page",
+            "pages": [
+              {
+                "page": "World Chain Mainnet",
+                "href": "https://worldchain-mainnet-status.alchemy.com/",
+                "external": true
+              },
+              {
+                "page": "World Chain Sepolia Testnet",
+                "href": "https://worldchain-sepolia-status.alchemy.com/",
+                "external": true
+              }
+            ]
+          },
+          {
+            "group": "Others",
+            "pages": [
+              {
+                "page": "Brand Kit",
+                "href": "https://world.org/press",
+                "external": true
+              },
+              {
+                "page": "World Whitepaper",
+                "href": "https://whitepaper.world.org/",
+                "external": true
+              }
+            ]
+          },
+          {
+            "group": "Legal",
+            "pages": [
+              {
+                "page": "Terms of Service",
+                "href": "https://vault.pactsafe.io/s/8a18d792-fd76-44db-9b92-b0bb7981c248/legal.html#contract-byutjvtyt",
+                "external": true
+              },
+              {
+                "page": "Privacy Policy",
+                "href": "https://vault.pactsafe.io/s/8a18d792-fd76-44db-9b92-b0bb7981c248/legal.html#contract-s1ytru6kk",
+                "external": true
+              }
+            ]
+          }
+        ]
       }
     ],
     "global": {
