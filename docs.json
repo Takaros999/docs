@@ -136,6 +136,21 @@
             "pages": ["world-id/index", "world-id/concepts"]
           },
           {
+            "group": "Use Cases",
+            "pages": [
+              "world-id/use-cases/index",
+              "world-id/use-cases/voting",
+              "world-id/use-cases/social-media",
+              "world-id/use-cases/wealth-distribution",
+              "world-id/use-cases/defi-and-fintech",
+              "world-id/use-cases/token-airdrops",
+              "world-id/use-cases/nfts",
+              "world-id/use-cases/customer-incentives",
+              "world-id/use-cases/marketplaces",
+              "world-id/use-cases/events"
+            ]
+          },
+          {
             "group": "ID Kit",
             "pages": [
               "world-id/id/getting-started",
@@ -145,7 +160,9 @@
               "world-id/id/cloud",
               "world-id/id/on-chain",
               "world-id/id/libraries",
-              "world-id/id/testing"
+              "world-id/id/testing",
+              "world-id/id/pitfalls",
+              "world-id/id/design-guidelines"
             ]
           },
           {

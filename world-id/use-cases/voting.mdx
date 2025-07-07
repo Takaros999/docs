@@ -1,0 +1,114 @@
+---
+title: "Voting Platforms"
+---
+
+<div className="mb-8">
+  <div className="flex items-center gap-4 mb-4">
+    <div className="relative inline-flex">
+      <div className="w-16 h-16 rounded-2xl flex items-center justify-center" style={{backgroundColor: 'rgba(73, 64, 224, 0.1)'}}>
+        <img src="/images/docs/use-cases/icons/voting-platforms.svg" alt="Voting Platforms" className="w-8 h-8" />
+      </div>
+    </div>
+    <div>
+      <h1 className="text-2xl font-bold mb-2" style={{color: 'rgb(73, 64, 224)'}}>Voting Platforms</h1>
+      <p className="text-gray-600 leading-6">
+        Using World ID, and particularly relying on global proof of personhood, can be used to build a truly democratic, one person one vote, system as well as novel voting systems
+      </p>
+    </div>
+  </div>
+</div>
+
+## What?
+
+Using World ID, and particularly relying on global proof of personhood, can be used to build a truly democratic, one person one vote, system as well as novel voting systems centered around unique humans. What's more, with World ID, these systems can be made in a fully privacy-preserving way, supporting fully anonymous voting, and making sure votes cannot be tracked across different proposals.
+
+## Applications & Problems Solved
+
+### Novel DAOs
+
+(Decentralized Autonomous Organizations) governance. Have governance proposals where individual's voices are more important than the number of tokens held.
+
+### Anonymous online polls
+
+This can apply for anything from city council elections, governors to referendums, plebiscites, and much more.
+
+### Government
+
+Public elections without duplicate votes, where each voter can only vote once. Further, this can be done in a public way where anyone can verify each election vote. This can apply for anything from city council elections, governors to referendums, plebiscites, and much more.
+
+<div className="mt-8 p-6 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg">
+  <h3 className="text-lg font-semibold text-blue-900 mb-3">Ready to get started?</h3>
+  <p className="text-blue-700 mb-4">
+    Jump into our getting started guide to learn how to integrate World ID into your voting platform.
+  </p>
+  <a href="/world-id/id/getting-started" className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+    Get Started →
+  </a>
+</div>
+
+## For Developers
+
+### Building an MVP
+
+The most basic version of a voting platform could look something as follows.
+
+-   Users can create proposals to vote on. They provide a description on the proposal and a time limit. Proposals support yes/no/abstain.
+-   Voters can then go into a proposal and cast a vote only once. The vote is verified with a World ID Incognito Action (to ensure proof of personhood, uniqueness, and prevent cross-proposals tracking).
+-   Votes are recorded in a backend, smart contract or decentralized database (like Ceramic).
+-   Anyone can view the vote results.
+
+You can find some conceptual wireframes below on how this could look like.
+
+![Quantum Voting](/images/docs/use-cases/quantumvote-1.png)
+
+![Quantum Voting](/images/docs/use-cases/quantumvote-2.png)
+
+The above can also be further extended to support multiple-option votes, combine with eligibility criteria (e.g. only users with a Twitter account can vote), support multiple World ID credentials for votes where the credential type determines the weight (e.g. Orb credential = 1 vote, device credential = 0.1 vote).
+
+## More feature ideas
+
+-   **Quadratic voting**. Allow only one person, one vote, but votes are counted quadratically, […]
+-   **Conviction voting**. Consider for example public goods funding, where funds are allocated based on votes received continuously over time. [This article](https://medium.com/giveth/conviction-voting-a-novel-continuous-decision-making-alternative-to-governance-aa746cfb9475) explains more on conviction voting.
+-   **Anonymous proof-of-vote NFT**. You get an NFT that you can use to prove you voted in a certain proposal. Could be done with [Sismo](https://docs.sismo.io/sismo-docs/technical-documentation/zk-badge-protocol) to preserve privacy.
+
+<div className="mt-12 p-6 bg-gray-50 border border-gray-200 rounded-lg">
+  <h3 className="text-lg font-semibold text-gray-900 mb-4">Explore Other Use Cases</h3>
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <a href="/world-id/use-cases/social-media" className="block p-4 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+      <div className="flex items-center gap-3 mb-2">
+        <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center">
+          <img src="/images/docs/use-cases/icons/social-media.svg" alt="Social Media" className="w-5 h-5" />
+        </div>
+        <span className="font-medium text-gray-900">Social Media</span>
+      </div>
+      <p className="text-sm text-gray-600">Bot protection and human verification for social platforms</p>
+    </a>
+    <a href="/world-id/use-cases/wealth-distribution" className="block p-4 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+      <div className="flex items-center gap-3 mb-2">
+        <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center">
+          <img src="/images/docs/use-cases/icons/wealth-distribution.svg" alt="Wealth Distribution" className="w-5 h-5" />
+        </div>
+        <span className="font-medium text-gray-900">Wealth Distribution</span>
+      </div>
+      <p className="text-sm text-gray-600">Equitable distribution of aid and resources</p>
+    </a>
+    <a href="/world-id/use-cases/" className="block p-4 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+      <div className="flex items-center gap-3 mb-2">
+        <div className="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center">
+          <span className="text-purple-600 font-bold text-xs">All</span>
+        </div>
+        <span className="font-medium text-gray-900">View All Use Cases</span>
+      </div>
+      <p className="text-sm text-gray-600">Discover all the ways to use World ID</p>
+    </a>
+  </div>
+</div>
+
+<div className="mt-8 flex justify-end">
+  <a href="/world-id/use-cases/social-media" className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+    <span>Next: Social Media</span>
+    <div className="w-5 h-5 rounded bg-white/20 flex items-center justify-center">
+      <img src="/images/docs/use-cases/icons/social-media.svg" alt="Social Media" className="w-3 h-3" />
+    </div>
+  </a>
+</div>
