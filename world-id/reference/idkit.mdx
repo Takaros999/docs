@@ -61,7 +61,7 @@ The following parameters can be passed as props to the `IDKitWidget` component:
     The signal to be included in the zero-knowledge proof. Typically used for on-chain actions, read more in [the On-chain section](/world-id/id/on-chain).
   </Property>
   <Property name="bridge_url" type="string" defaultValue='"https://bridge.worldcoin.org"'>
-    The URL of the [Wallet Bridge](https://github.com/worldcoin/wallet-bridge) to use for establishing a connection between IDKit and the user's World ID Wallet. Defaults to the bridge service hosted by Worldcoin. **Only change this if you are running your own bridge service.** Read more in [Protocol Internals](/world-id/further-reading/protocol-internals#wallet-bridge).
+    The URL of the [Wallet Bridge](https://github.com/worldcoin/wallet-bridge) to use for establishing a connection between IDKit and the user's World ID Wallet. Defaults to the bridge service hosted by Worldcoin. **Only change this if you are running your own bridge service.** Read more in Protocol Internals.
     
     <Note type="warning">World App will temporarily prevent users from connecting to a Wallet Bridge that is not hosted by Worldcoin or Tools for Humanity while security reviews are ongoing, so we **recommend using the default value** by leaving the `bridge_url` parameter undefined.</Note>
   </Property>
