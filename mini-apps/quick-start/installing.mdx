@@ -5,6 +5,7 @@ title: "Getting Started"
 [MiniKit-JS](https://github.com/worldcoin/minikit-js) is our official SDK for creating mini apps that work with World App. It provides handy functions and types to make development a breeze.
 
 ## Quick Start
+
 The fastest way to get started is by using our template next-15 repository.
 Run the following command and follow the instructions to create a new mini app. For cleanliness we recommend using `pnpm` as your package manager.
 
@@ -12,9 +13,20 @@ Run the following command and follow the instructions to create a new mini app. 
 npx @worldcoin/create-mini-app@latest my-first-mini-app
 ```
 
-<div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-  <img src="/images/docs/mini-apps/quick-start/template.png" alt="Template" width="300" height="700" />
-  <p style={{fontStyle: 'italic', marginTop: '0.5rem'}}>Correctly running template should look like this</p>
+<div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+  <img
+    src="/images/docs/mini-apps/quick-start/template.png"
+    alt="Template"
+    style={{
+      width: "220px",
+      height: "auto",
+      borderRadius: "12px",
+      boxShadow: "0 2px 10px rgba(0,0,0,0.06)",
+    }}
+  />
+  <p style={{ fontStyle: "italic", marginTop: "0.5rem" }}>
+    Correctly running template should look like this
+  </p>
 </div>
 
 ## Manual Installation
@@ -41,7 +53,7 @@ Or use a CDN like [jsdelivr](https://www.jsdelivr.com/package/npm/@worldcoin/min
 
 ```html minikit-js
 <script type="module">
-  import { MiniKit } from "https://cdn.jsdelivr.net/npm/@worldcoin/minikit-js@[version]/+esm"
+  import { MiniKit } from "https://cdn.jsdelivr.net/npm/@worldcoin/minikit-js@[version]/+esm";
 </script>
 ```
 
@@ -52,19 +64,19 @@ Or use a CDN like [jsdelivr](https://www.jsdelivr.com/package/npm/@worldcoin/min
 1. Wrap your root with the MiniKitProvider component.This provides the MiniKit object to your app.
 
 ```tsx src/index.tsx
-import { MiniKitProvider } from '@worldcoin/minikit-js/minikit-provider';
+import { MiniKitProvider } from "@worldcoin/minikit-js/minikit-provider";
 export default async function Root({
-	children,
+  children,
 }: Readonly<{
-	children: React.ReactNode
+  children: React.ReactNode;
 }>) {
-	return (
-		<html lang="en">
-			<MiniKitProvider>
-				<body className={inter.className}>{children}</body>
-			</MiniKitProvider>
-		</html>
-	)
+  return (
+    <html lang="en">
+      <MiniKitProvider>
+        <body className={inter.className}>{children}</body>
+      </MiniKitProvider>
+    </html>
+  );
 }
 ```
 
@@ -74,25 +86,23 @@ export default async function Root({
 
 ```tsx
 // ...
-console.log(MiniKit.isInstalled())
+console.log(MiniKit.isInstalled());
 ```
-
 
 ## Build with AI
 
 We have generated a [llms-full.txt](https://docs.world.org/llms-full.txt) file that converts all our documentation into a single markdown document following the https://llmstxt.org/ standard.
 
-
 ## Template Repositories
 
 The following template repositories are also available:
--   [Vanilla JS (using a CDN) template (featuring a simple backend for verifications)](https://github.com/new?template_name=minikit-js-template&template_owner=worldcoin),
--   [Wallet Auth + Send Transaction example](https://github.com/worldcoin/minikit-web3-example).
--   [Community example - Wallet Auth using JWT](https://github.com/wlding-blocks/wld-mini-apps-101).
--   [Community example - Wallet Auth using NextAuth](https://github.com/supercorp-ai/minikit-wallet-auth-next-auth).
+
+- [Vanilla JS (using a CDN) template (featuring a simple backend for verifications)](https://github.com/new?template_name=minikit-js-template&template_owner=worldcoin),
+- [Community example - Wallet Auth using JWT](https://github.com/wlding-blocks/wld-mini-apps-101).
+- [Community example - Wallet Auth using NextAuth](https://github.com/supercorp-ai/minikit-wallet-auth-next-auth).
 
 Otherwise, continue below with the installation instructions.
 
 <Note>
-Watch a video tutorial [here](https://www.youtube.com/watch?v=QJ0htHP6lb0).
+  Watch a video tutorial [here](https://www.youtube.com/watch?v=QJ0htHP6lb0).
 </Note>
