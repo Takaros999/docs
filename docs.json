@@ -11,7 +11,7 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Overview",
+        "tab": "Home",
         "groups": [
           {
             "group": "Get Started",
@@ -57,6 +57,13 @@
             ]
           },
           {
+            "group": "Notifications",
+            "pages": [
+              "mini-apps/notifications/features-and-guidelines",
+              "mini-apps/notifications/how-to-send-notifications"
+            ]
+          },
+          {
             "group": "Technical Reference",
             "pages": [
               "mini-apps/reference/init",
@@ -77,13 +84,6 @@
               "mini-apps/growth/gamification",
               "mini-apps/growth/notifications",
               "mini-apps/growth/analytics"
-            ]
-          },
-          {
-            "group": "Notifications",
-            "pages": [
-              "mini-apps/notifications/features-and-guidelines",
-              "mini-apps/notifications/how-to-send-notifications"
             ]
           },
           {
@@ -134,21 +134,6 @@
           {
             "group": "Introduction",
             "pages": ["world-id/index", "world-id/concepts"]
-          },
-          {
-            "group": "Use Cases",
-            "pages": [
-              "world-id/use-cases/index",
-              "world-id/use-cases/voting",
-              "world-id/use-cases/social-media",
-              "world-id/use-cases/wealth-distribution",
-              "world-id/use-cases/defi-and-fintech",
-              "world-id/use-cases/token-airdrops",
-              "world-id/use-cases/nfts",
-              "world-id/use-cases/customer-incentives",
-              "world-id/use-cases/marketplaces",
-              "world-id/use-cases/events"
-            ]
           },
           {
             "group": "ID Kit",
@@ -319,8 +304,8 @@
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:support@worldcoin.org"
+        "label": "Explore Apps",
+        "href": "https://world.org/ecosystem"
       }
     ],
     "primary": {
