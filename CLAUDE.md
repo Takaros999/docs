@@ -22,6 +22,7 @@ When migrating from the old Next.js-based docs to Mintlify, use these component 
 ### 2. Image Handling
 
 **Important**: Mintlify expects images at the root level, not in `/public/`:
+
 - Store images in `/images/`, `/icons/`, `/logo/` directories (root level)
 - Reference images without the `/public/` prefix: `src="/images/example.png"`
 - When migrating, copy from `/public/images/` to `/images/`
@@ -29,11 +30,13 @@ When migrating from the old Next.js-based docs to Mintlify, use these component 
 ### 3. Table Formatting
 
 For tables with icons and text that need to be aligned:
+
 ```markdown
 | <div className="flex items-center gap-2"><img src="/icons/icon.svg" alt="Alt" className="w-6 h-6" /><span className="font-semibold">Text</span></div> | Value |
 ```
 
 To prevent header text wrapping:
+
 ```markdown
 | <span className="whitespace-nowrap">Long Header Text</span> | Description |
 ```
@@ -41,6 +44,7 @@ To prevent header text wrapping:
 ### 4. Navigation Structure
 
 The navigation is configured in `docs.json`:
+
 - Use tabs for major sections (Overview, World ID, etc.)
 - Group related pages within each tab
 - Maintain the same URL structure as the old docs for consistency
@@ -55,11 +59,12 @@ The navigation is configured in `docs.json`:
 ## Testing Commands
 
 When making changes, test with:
+
 ```bash
 # Run linting if available
 npm run lint
 
-# Run type checking if available  
+# Run type checking if available
 npm run typecheck
 ```
 
@@ -100,7 +105,9 @@ npm run typecheck
 When documenting APIs in Mintlify, use these native components for better readability:
 
 ### 1. ParamField Component
+
 Replace parameter tables with `<ParamField>` components:
+
 ```jsx
 <ParamField body="nullifier_hash" type="string" required>
   The unique user identifier (nullifier hash), as provided by IDKit.
@@ -108,47 +115,51 @@ Replace parameter tables with `<ParamField>` components:
 ```
 
 ### 2. CodeGroup Component
+
 Group related code examples:
-```jsx
+
+````jsx
 <CodeGroup>
 ```bash cURL
 curl -X POST "/api/v2/verify/{app_id}" \
     -H "Content-Type: application/json"
-```
+````
 
 ```javascript JavaScript
 fetch(apiUrl, {
-  method: 'POST',
-  headers: {'Content-Type': 'application/json'}
-})
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+});
 ```
+
 </CodeGroup>
 ```
 
 ### 3. Tabs Component
+
 Organize multiple responses or options:
+
 ```jsx
 <Tabs>
   <Tab title="200 OK">
-    ```json
-    {"success": true}
-    ```
+    <pre><code className="language-json">{"success": true}</code></pre>
   </Tab>
   <Tab title="400 Bad Request">
-    ```json
-    {"error": "Invalid request"}
-    ```
+    <pre><code className="language-json">{"error": "Invalid request"}</code></pre>
   </Tab>
 </Tabs>
 ```
 
 ### 4. Endpoint Display
+
 Always show the endpoint clearly at the top of each API section:
-```
+
+````
 <CodeGroup>
 ```bash Endpoint
 POST /api/v2/verify/{app_id}
-```
+````
+
 </CodeGroup>
 ```
 
@@ -158,6 +169,7 @@ Always reference the Mintlify documentation when migrating or creating new docs:
 https://mintlify.com/docs/llms-full.txt
 
 Key sections to reference:
+
 - Components: For available UI components like ParamField, CodeGroup, Tabs
 - API References: For best practices in documenting APIs
 - Content Organization: For structuring documentation effectively
@@ -165,6 +177,7 @@ Key sections to reference:
 ## Navigation and Page Titles
 
 ### Important: Always Add Custom Titles
+
 Mintlify auto-generates page titles from filenames if no title is specified in frontmatter, which can cause case sensitivity issues. Always add custom titles:
 
 ```markdown
@@ -174,6 +187,7 @@ title: "Your Custom Title"
 ```
 
 ### Title Guidelines
+
 - Use proper capitalization (e.g., "IDKit" not "Idkit")
 - Be consistent with product names (e.g., "World ID" not "world-id")
 - Use descriptive titles that match the content
@@ -184,7 +198,9 @@ title: "Your Custom Title"
 When documenting SDK/library references like IDKit:
 
 ### 1. Use Properties Component for Parameters
+
 Replace parameter tables with Mintlify's `<Properties>` component:
+
 ```jsx
 <Properties>
   <Property name="app_id" type="string" required>
@@ -194,42 +210,54 @@ Replace parameter tables with Mintlify's `<Properties>` component:
 ```
 
 ### 2. Group Related Sections
+
 - Components and their props
 - Hooks and their usage
 - Types and interfaces
 - Error handling
 
 ### 3. Code Examples with Focus
+
 Use the `focus` attribute to highlight important lines:
+
 ```jsx
-```jsx {3-7}
 // Important lines will be highlighted
 ```
 
 ## Image and Media Best Practices
 
 ### 1. Preserve Image Dimensions
+
 When migrating images with specific dimensions, convert them appropriately:
 
 **From Next.js Image component:**
+
 ```jsx
 <Image src="/path/to/image.png" width={300} height={700} />
 ```
 
 **To Mintlify HTML:**
+
 ```html
 <img src="/path/to/image.png" alt="Description" width="300" height="700" />
 ```
 
 **For styled images:**
+
 ```html
-<img src="/path/to/image.png" alt="Description" style="max-width: 300px; height: auto;" />
+<img
+  src="/path/to/image.png"
+  alt="Description"
+  style="max-width: 300px; height: auto;"
+/>
 ```
 
 ### 2. Video Elements
+
 Always preserve width attributes on videos:
+
 ```html
-<video width="300" autoPlay muted loop playsInline>
+<video width="300" autoplay muted loop playsinline>
   <source src="/path/to/video.mp4" type="video/mp4" />
 </video>
 ```
@@ -237,9 +265,11 @@ Always preserve width attributes on videos:
 ## Page Headers and Titles
 
 ### Important: Avoid Duplicate Headers
+
 Mintlify automatically renders the frontmatter title as the page header. Do NOT include an H1 (`#`) at the beginning of the content.
 
 **Wrong:**
+
 ```markdown
 ---
 title: "Getting Started"
@@ -251,6 +281,7 @@ Content here...
 ```
 
 **Correct:**
+
 ```markdown
 ---
 title: "Getting Started"

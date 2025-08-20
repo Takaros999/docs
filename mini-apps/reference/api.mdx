@@ -1,6 +1,26 @@
 ---
 title: API Reference
+description: Mini Apps API endpoints and playground (OpenAPI-backed)
 ---
+
+<Note>
+  This section now uses an OpenAPI spec to power endpoint pages and the
+  playground. Prefer the endpoint pages in the sidebar for the latest
+  parameters, responses, and live requests. Spec:{" "}
+  <code>/openapi/world-miniapps.json</code>.
+</Note>
+
+## Endpoints
+
+- POST /api/v2/create-action/{app_id}
+- POST /api/v2/minikit/send-notification
+- POST /api/v2/verify/{app_id}
+- GET /api/v2/minikit/transaction/{transaction_id}
+- GET /api/v2/minikit/transaction/debug
+- GET /api/v2/minikit/user-grant-cycle
+- GET /public/v1/miniapps/prices
+
+Below content was removed to avoid duplication. Use the endpoint pages in the sidebar.
 
 ## Send Notification
 
@@ -13,19 +33,27 @@ This endpoint lets you send notifications to users of your mini app and requires
 ### Body Params
 
 <ParamField body="wallet_addresses" type="string[]" required>
-  The `wallet_addresses` is an array of wallet addresses to send the notification to. Users must have opted in to notifications for your app. Max 1000 users per call.
+  The `wallet_addresses` is an array of wallet addresses to send the
+  notification to. Users must have opted in to notifications for your app. Max
+  1000 users per call.
 </ParamField>
 
 <ParamField body="title" type="string" required>
-  The `title` is the title of the notification. It should be 30 characters or less. May contain emojis.
+  The `title` is the title of the notification. It should be 30 characters or
+  less. May contain emojis.
 </ParamField>
 
 <ParamField body="message" type="string" required>
-  The `message` is the message of the notification. It should be 200 characters or less. You can include the special variable `${username}` in your message, which will be replaced with the actual username of the recipient when the notification is delivered.
+  The `message` is the message of the notification. It should be 200 characters
+  or less. You can include the special variable `${username}` in your message,
+  which will be replaced with the actual username of the recipient when the
+  notification is delivered.
 </ParamField>
 
 <ParamField body="mini_app_path" type="string" required>
-  The `mini_app_path` is the url encoded path of the mini app where your notification should link to when the user clicks on it. Should be of the format `worldapp://mini-app?app_id=[app_id]&path=[path]` (path is optional).
+  The `mini_app_path` is the url encoded path of the mini app where your
+  notification should link to when the user clicks on it. Should be of the
+  format `worldapp://mini-app?app_id=[app_id]&path=[path]` (path is optional).
 </ParamField>
 
 <ParamField body="app_id" type="string" required>
@@ -35,7 +63,8 @@ This endpoint lets you send notifications to users of your mini app and requires
 ### Request Headers
 
 <ParamField header="Authorization" type="string" required>
-  The `Authorization` header should be the `api_key` for your app from the Developer Portal. Make sure to prefix it with `Bearer {api_key}`.
+  The `Authorization` header should be the `api_key` for your app from the
+  Developer Portal. Make sure to prefix it with `Bearer {api_key}`.
 </ParamField>
 
 <CodeGroup title="Request">
@@ -48,19 +77,20 @@ curl -X POST "https://developer.worldcoin.org/api/v2/minikit/send-notification" 
 
 ```javascript
 fetch(apiUrl, {
-    method: 'POST',
-    headers: {
-        'Authorization': 'Bearer {api_key}',
-    },
-    body: JSON.stringify({
-        app_id: "app_id",
-        wallet_addresses: ["0x123", "0x456"],
-        title: "title",
-        message: "Hello ${username}, your transaction is complete!",
-        mini_app_path: "mini_app_path"
-    })
-})
+  method: "POST",
+  headers: {
+    Authorization: "Bearer {api_key}",
+  },
+  body: JSON.stringify({
+    app_id: "app_id",
+    wallet_addresses: ["0x123", "0x456"],
+    title: "title",
+    message: "Hello ${username}, your transaction is complete!",
+    mini_app_path: "mini_app_path",
+  }),
+});
 ```
+
 </CodeGroup>
 
 ### Response
@@ -74,10 +104,11 @@ fetch(apiUrl, {
 </ResponseField>
 
 <ResponseField name="result" type="array">
-  An array of notification delivery results for each wallet address, where each item contains:
-  - `walletAddress` (string): The wallet address that the notification was attempted to be sent to
-  - `sent` (boolean): Whether the notification was successfully sent to this wallet address
-  - `reason` (string, optional): If the notification failed to send, this field contains the reason
+  An array of notification delivery results for each wallet address, where each
+  item contains: - `walletAddress` (string): The wallet address that the
+  notification was attempted to be sent to - `sent` (boolean): Whether the
+  notification was successfully sent to this wallet address - `reason` (string,
+  optional): If the notification failed to send, this field contains the reason
 </ResponseField>
 
 <CodeGroup title="Response">
@@ -105,7 +136,8 @@ fetch(apiUrl, {
 ## Get Transaction
 
 <ParamField path="method" type="GET">
-  https://developer.worldcoin.org/api/v2/minikit/transaction/{transaction_id}?app_id=&type=
+  https://developer.worldcoin.org/api/v2/minikit/transaction/{transaction_id}
+  ?app_id=&type=
 </ParamField>
 
 This endpoint lets you query your apps transactions for their current status. You will only be able to query for transactions of apps where you possess the `api_key`.
@@ -117,7 +149,8 @@ This endpoint lets you query your apps transactions for their current status. Yo
 </ParamField>
 
 <ParamField query="type" type="string" required>
-  The `type` is either payment (pay) or transaction (sendTransaction) depending on the command you used.
+  The `type` is either payment (pay) or transaction (sendTransaction) depending
+  on the command you used.
 </ParamField>
 
 <CodeGroup title="Request">
@@ -127,9 +160,10 @@ curl -X GET "https://developer.worldcoin.org/api/v2/minikit/transaction/{transac
 
 ```javascript
 fetch(apiUrl, {
-    method: 'GET',
-})
+  method: "GET",
+});
 ```
+
 </CodeGroup>
 
 ### Response
@@ -143,7 +177,8 @@ fetch(apiUrl, {
 </ResponseField>
 
 <ResponseField name="transaction_status" type="string">
-  The current `transaction_status`, can be either 'pending', 'mined', or 'failed'.
+  The current `transaction_status`, can be either 'pending', 'mined', or
+  'failed'.
 </ResponseField>
 
 <ResponseField name="from" type="string">
@@ -155,11 +190,13 @@ fetch(apiUrl, {
 </ResponseField>
 
 <ResponseField name="timestamp" type="string">
-  The `timestamp` is the time when the transaction was created, in ISO 8601 format.
+  The `timestamp` is the time when the transaction was created, in ISO 8601
+  format.
 </ResponseField>
 
 <ResponseField name="token_amount" type="string">
-  The `token_amount` is the amount of tokens transferred, in BigInt with 6 decimals.
+  The `token_amount` is the amount of tokens transferred, in BigInt with 6
+  decimals.
 </ResponseField>
 
 <ResponseField name="token" type="string">
@@ -192,16 +229,17 @@ fetch(apiUrl, {
 
 ```json Transaction
 {
-    "transactionId": "0xa5b02107433da9e2a450c433560be1db01963a9146c14eed076cbf2c61837d60",
-    "transactionHash": "0xa8388148b630b49a3d5a739eaad9e98b5766235cdb21a5ec8d3f89053d982a71",
-    "transactionStatus": "failed",
-    "miniappId": "app_staging_5748c49d2e6c68849479e0b321bc5257",
-    "updatedAt": "2024-09-09T15:18:25.320Z",
-    "network": "worldchain",
-    "fromWalletAddress": "0x2321401e6a175a7236498ab66f25cd1db4b17558",
-    "toContractAddress": "0x2321401e6a175a7236498ab66f25cd1db4b17558"
+  "transactionId": "0xa5b02107433da9e2a450c433560be1db01963a9146c14eed076cbf2c61837d60",
+  "transactionHash": "0xa8388148b630b49a3d5a739eaad9e98b5766235cdb21a5ec8d3f89053d982a71",
+  "transactionStatus": "failed",
+  "miniappId": "app_staging_5748c49d2e6c68849479e0b321bc5257",
+  "updatedAt": "2024-09-09T15:18:25.320Z",
+  "network": "worldchain",
+  "fromWalletAddress": "0x2321401e6a175a7236498ab66f25cd1db4b17558",
+  "toContractAddress": "0x2321401e6a175a7236498ab66f25cd1db4b17558"
 }
 ```
+
 </CodeGroup>
 
 ---
@@ -225,7 +263,8 @@ The debug URL is only available once the permit2 expires. So for development it 
 ### Request Headers
 
 <ParamField header="Authorization" type="string" required>
-  The `Authorization` header should be the `api_key` for your app from the Developer Portal. Make sure to prefix it with `Bearer {api_key}`.
+  The `Authorization` header should be the `api_key` for your app from the
+  Developer Portal. Make sure to prefix it with `Bearer {api_key}`.
 </ParamField>
 
 <CodeGroup title="Request">
@@ -236,24 +275,25 @@ curl -X GET "https://developer.worldcoin.org/api/v2/minikit/transaction/debug?ap
 
 ```javascript
 fetch(apiUrl, {
-    method: 'GET',
-    headers: {
-        'Authorization': 'Bearer {api_key}',
-    }
-})
+  method: "GET",
+  headers: {
+    Authorization: "Bearer {api_key}",
+  },
+});
 ```
+
 </CodeGroup>
 
 ### Response
 
 <ResponseField name="transactions" type="array">
-  An array of transaction debug information, where each item contains:
-  - `debugUrl` (string): The Tenderly URL for debugging the transaction
-  - `createdAt` (string): The timestamp when the transaction was created, in ISO 8601 format
-  - `block` (number): The block number where the transaction was attempted
-  - `simulationRequestId` (string): The ID of the simulation request
-  - `simulationError` (string): The error message from the simulation, if any
-  - `walletAddress` (string): The wallet address associated with the transaction
+  An array of transaction debug information, where each item contains: -
+  `debugUrl` (string): The Tenderly URL for debugging the transaction -
+  `createdAt` (string): The timestamp when the transaction was created, in ISO
+  8601 format - `block` (number): The block number where the transaction was
+  attempted - `simulationRequestId` (string): The ID of the simulation request -
+  `simulationError` (string): The error message from the simulation, if any -
+  `walletAddress` (string): The wallet address associated with the transaction
 </ResponseField>
 
 <CodeGroup title="Response">
@@ -286,11 +326,13 @@ This endpoint lets you query the latest prices of the Worldcoin token in various
 ### Query Params
 
 <ParamField query="fiatCurrencies" type="string" required>
-  The `fiatCurrencies` is a comma-separated list of fiat currencies following ISO4217 currency code. eg. `USD,EUR,JPY,ARS`
+  The `fiatCurrencies` is a comma-separated list of fiat currencies following
+  ISO4217 currency code. eg. `USD,EUR,JPY,ARS`
 </ParamField>
 
 <ParamField query="cryptoCurrencies" type="string" required>
-  The `cryptoCurrencies` is a comma-separated list of currencies we support. eg. `USDC,WLD`
+  The `cryptoCurrencies` is a comma-separated list of currencies we support. eg.
+  `USDC,WLD`
 </ParamField>
 
 <CodeGroup title="Request">
@@ -300,9 +342,10 @@ curl -X GET "https://app-backend.worldcoin.dev/public/v1/miniapps/prices?cryptoC
 
 ```javascript
 fetch(apiUrl, {
-    method: 'GET',
-})
+  method: "GET",
+});
 ```
+
 </CodeGroup>
 
 ### Response (abridged)
@@ -314,11 +357,14 @@ Detailed are a just a few values in the return that could be confusing. See the 
 </ResponseField>
 
 <ResponseField name="amount" type="string">
-  The `amount` represents the non converted value for the price of 1 WLD for a given currency
+  The `amount` represents the non converted value for the price of 1 WLD for a
+  given currency
 </ResponseField>
 
 <ResponseField name="decimals" type="string">
-  The current `decimals`, should be used to calculate the converted price. ie an amount of 1000000 with 6 decimals would mean a price of $1.00 via, 1000000 * 10^-6
+  The current `decimals`, should be used to calculate the converted price. ie an
+  amount of 1000000 with 6 decimals would mean a price of $1.00 via, 1000000 *
+  10^-6
 </ResponseField>
 
 <CodeGroup title="Response">

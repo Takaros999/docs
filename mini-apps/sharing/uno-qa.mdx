@@ -7,42 +7,52 @@ View your token balances and check prices all in one place. Buy, Sell, Swap, or 
 
 Uno now supports a Quick Action to deeplink directly to the swap tab, with a specific swap ready to be executed.
 
-<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+<div
+  style={{
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+  }}
+>
   <div style={{ flex: 1 }}>
     <h3>Parameters</h3>
-    
+
     <ParamField path="tab" type="string" required>
       Currently only supports "swap"; this allows deep linking to the swap tab.
     </ParamField>
-    
+
     <ParamField path="fromToken" type="string">
       Token address for the from token.
     </ParamField>
-    
+
     <ParamField path="amount" type="string">
       Base units amount of the from token.
     </ParamField>
-    
+
     <ParamField path="toToken" type="string">
       Token address for the to token.
     </ParamField>
-    
+
     <ParamField path="referrerAppId" type="string">
-      World Miniapp App id of the referring World Miniapp. When provided, a "Go Back" deeplink button will
-      appear in the top left of the header that takes the user back to the referring Miniapp.
+      World Miniapp App id of the referring World Miniapp. When provided, a "Go
+      Back" deeplink button will appear in the top left of the header that takes
+      the user back to the referring Miniapp.
     </ParamField>
-    
+
     <ParamField path="referrerDeeplinkPath" type="string">
-      Deeplink path for referring World Miniapp Quick Actions. When provided, this path will be added to the
-      "Go Back" deeplink button so that the referring Miniapp can execute a Quick Action when the user taps
-      "Go Back" in Uno.
+      Deeplink path for referring World Miniapp Quick Actions. When provided,
+      this path will be added to the "Go Back" deeplink button so that the
+      referring Miniapp can execute a Quick Action when the user taps "Go Back"
+      in Uno.
     </ParamField>
+
   </div>
-  <div style={{ marginLeft: '20px' }}>
+  <div style={{ marginLeft: "20px" }}>
     <img
       src="/images/docs/mini-apps/quick-actions/uno-qa.png"
       alt="Swap Screen"
-      style={{ maxWidth: '300px', height: 'auto' }}
+      className="m-auto block"
+      width="300"
     />
   </div>
 </div>
@@ -50,7 +60,7 @@ Uno now supports a Quick Action to deeplink directly to the swap tab, with a spe
 ## Helper function
 
 ```tsx
-const UNO_APP_ID = 'app_a4f7f3e62c1de0b9490a5260cb390b56'
+const UNO_APP_ID = "app_a4f7f3e62c1de0b9490a5260cb390b56";
 
 function getUnoDeeplinkUrl({
   fromToken,
@@ -59,40 +69,40 @@ function getUnoDeeplinkUrl({
   referrerAppId,
   referrerDeeplinkPath,
 }: {
-  fromToken?: string
-  toToken?: string
-  amount?: string
-  referrerAppId?: string
-  referrerDeeplinkPath?: string
+  fromToken?: string;
+  toToken?: string;
+  amount?: string;
+  referrerAppId?: string;
+  referrerDeeplinkPath?: string;
 }) {
-  let path = `?tab=swap`
+  let path = `?tab=swap`;
   if (fromToken) {
-    path += `&fromToken=${fromToken}`
+    path += `&fromToken=${fromToken}`;
     if (amount) {
-      path += `&amount=${amount}`
+      path += `&amount=${amount}`;
     }
   }
   if (toToken) {
-    path += `&toToken=${toToken}`
+    path += `&toToken=${toToken}`;
   }
   if (referrerAppId) {
-    path += `&referrerAppId=${referrerAppId}`
+    path += `&referrerAppId=${referrerAppId}`;
   }
   if (referrerDeeplinkPath) {
-    path += `&referrerDeeplinkPath=${encodeURIComponent(referrerDeeplinkPath)}`
+    path += `&referrerDeeplinkPath=${encodeURIComponent(referrerDeeplinkPath)}`;
   }
-  const encodedPath = encodeURIComponent(path)
-  return `https://worldcoin.org/mini-app?app_id=${UNO_APP_ID}&path=${encodedPath}`
+  const encodedPath = encodeURIComponent(path);
+  return `https://worldcoin.org/mini-app?app_id=${UNO_APP_ID}&path=${encodedPath}`;
 }
 
 // create a trade for 1.2345 USDC to WETH
 console.log(
   getUnoDeeplinkUrl({
-    fromToken: '0x79A02482A880bCE3F13e09Da970dC34db4CD24d1',
-    amount: '1234500',
-    toToken: '0x4200000000000000000000000000000000000006',
+    fromToken: "0x79A02482A880bCE3F13e09Da970dC34db4CD24d1",
+    amount: "1234500",
+    toToken: "0x4200000000000000000000000000000000000006",
   })
-)
+);
 ```
 
 ### Example output link

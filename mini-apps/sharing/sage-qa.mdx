@@ -2,7 +2,6 @@
 title: "Sage Support"
 ---
 
-
 [Sage](https://worldcoin.org/ecosystem/app_5dee2f19cd6eef599eb6ab275a0a7523) is an AI chatbot that lets users ask questions and get answers.
 
 Sage Support enables developers to integrate Sage chats seamlessly into their World Mini Apps. Developers get a white label version of Sage that acts as a support assistant for their Mini App using the context they give it.
@@ -13,17 +12,19 @@ Sage Support enables developers to integrate Sage chats seamlessly into their Wo
 - **Custom Context Parameters**: Tailor Sage's responses based on Mini App specific data.
 - **Logs and Analytics**: Track and understand what types of questions your users are asking.
 
-<div style={{ position: 'relative', width: '100%' }}>
-    <img
-        src="/images/docs/mini-apps/quick-actions/sage1-qa.png"
-        alt="Sage Developer Dashboard Analytics"
-        style={{ position: 'absolute', width: '100%', maxWidth: '600px', zIndex: 1, borderRadius: '12px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}
-    />
-    <img
-        src="/images/docs/mini-apps/quick-actions/sage2-qa.png"
-        alt="Sage Developer Dashboard Settings"
-        style={{ position: 'relative', width: '100%', maxWidth: '600px', marginLeft: '33%', zIndex: 2, borderRadius: '12px', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)' }}
-    />
+<div className="flex gap-4 justify-center">
+  <img
+    src="/images/docs/mini-apps/quick-actions/sage1-qa.png"
+    alt="Sage Developer Dashboard Analytics"
+    className="block"
+    width="300"
+  />
+  <img
+    src="/images/docs/mini-apps/quick-actions/sage2-qa.png"
+    alt="Sage Developer Dashboard Settings"
+    className="block"
+    width="300"
+  />
 </div>
 
 ---
@@ -36,7 +37,7 @@ Go to the [Sage Developer dashboard](https://dev-dashboard-gamma.vercel.app) and
 
 ### 2. Customizing Sage to fit your app
 
-With a project created, head over to the project's settings, this page is accessible by going into: **Apps > Your App > Settings**. (Navigation is available through the menu bar on the top right or  the top left breadcrumbs)
+With a project created, head over to the project's settings, this page is accessible by going into: **Apps > Your App > Settings**. (Navigation is available through the menu bar on the top right or the top left breadcrumbs)
 
 In this page you can find parameters to fine tune Sage to best interact with your users in the context of your app, a comprehensive description of these parameters is present [below](#app-settings).
 
@@ -53,9 +54,9 @@ npm install sage-support
 Once the dependency installed, the simplest way to integrate Sage Support is:
 
 ```tsx
-import { SageSupport } from 'sage-support';
+import { SageSupport } from "sage-support";
 
-<SageSupport projectId={YOUR_APP_ID} />
+<SageSupport projectId={YOUR_APP_ID} />;
 ```
 
 Where `YOUR_APP_ID` is the App ID (number) you can find in the [Sage Developer Dashboard](https://dev-dashboard-gamma.vercel.app) (top right).
@@ -64,14 +65,15 @@ More configuration options for the component are available [below](#sage-support
 
 ### 4. Sage Support Link
 
-Generate your app's Support Link using the [Support Link wizard](#support-link-generator) and use it as the Support URL under **Worldcoin Developer > Mini App > Configuration > App Store > Support > Link**. 
+Generate your app's Support Link using the [Support Link wizard](#support-link-generator) and use it as the Support URL under **Worldcoin Developer > Mini App > Configuration > App Store > Support > Link**.
 
 ### Analytics
 
 Once you've started using Sage Support in your Mini App, analytics are also available in the [Sage Developer Dashboard](https://dev-dashboard-gamma.vercel.app), allowing you to identify the usage of Sage Support in your app and understand how users are using it. You can find more information about analytics [below](#app-analytics).
 
 <Note>
-    This is all you need to get Sage Support working. If you wish to customize it further, or better understand the various parameters continue reading below.
+  This is all you need to get Sage Support working. If you wish to customize it
+  further, or better understand the various parameters continue reading below.
 </Note>
 
 ---
@@ -139,25 +141,29 @@ npm install sage-support
 From the get go you can use Sage Support by using the basic implementation, the only mandatory parameter to be passed to the component is the `projectId`. This ID (App ID) is retrieve from the Settings page in the [Sage Developer dashboard](https://dev-dashboard-gamma.vercel.app).
 
 ```tsx
-import { SageSupport } from 'sage-support';
+import { SageSupport } from "sage-support";
 
-<SageSupport projectId={YOUR_APP_ID} />
+<SageSupport projectId={YOUR_APP_ID} />;
 ```
 
 ### Props & Personalisation
 
 Other props allow you to customize both the aesthetic and behavior of the Sage Support Chat.
+
 <ParamField path="projectId" type="number" required>
-    Links your component to your Sage Developer project, used for analytics and behavior.
+  Links your component to your Sage Developer project, used for analytics and
+  behavior.
 </ParamField>
 <ParamField path="returnURI" type="string">
-    Allows you to make use of the return button on the top left of the Sage Support chat window. The value to be passed to this prop is a [quick action URL](https://docs.world.org/mini-apps/sharing/quick-actions).
+  Allows you to make use of the return button on the top left of the Sage
+  Support chat window. The value to be passed to this prop is a [quick action
+  URL](https://docs.world.org/mini-apps/sharing/quick-actions).
 </ParamField>
 <ParamField path="className" type="string">
-    Allows you to pass custom CSS classes to affect the fallback default button.
+  Allows you to pass custom CSS classes to affect the fallback default button.
 </ParamField>
 <ParamField path="children" type="React.ReactNode">
-    Allows you to pass a custom React element to replace the default button.
+  Allows you to pass a custom React element to replace the default button.
 </ParamField>
 
 ---
@@ -189,10 +195,12 @@ This support link, akin to the [`SageSupport` component](#sage-support-component
     2. All ampersand characters (such as the one in `&path`) have to be replaced with the sequence `(amps)`.
 
     To make this process easier, you can make use of the generator below or inside the [Sage Developer Dashboard](https://dev-dashboard-gamma.vercel.app). Any URIs outside of the `worldcoin.org/mini-app` space are not allowed.
+
 </ParamField>
 
 ### Support Link Generator
 
 <Note>
-The Support Link Generator component would be inserted here in the actual implementation.
+  The Support Link Generator component would be inserted here in the actual
+  implementation.
 </Note>
