@@ -33,7 +33,7 @@ Deep-link (opens World App directly if installed)
 `worldapp://mini-app?app_id={app_id}&path={path}`
 
 <Note>
-Need to break out of an in-app web-view? Append open_out_of_window=true.
+  Need to break out of an in-app web-view? Append open_out_of_window=true.
 </Note>
 
 ### 2. Generate Share Links
@@ -42,11 +42,11 @@ Create a shareable link that includes the referral information:
 
 ```typescript
 function generateInviteLink(userId: string): string {
-	const baseUrl = 'https://world.org/mini-app'
-	const appId = 'your_app_id'
-	const path = encodeURIComponent(`/invite?code=${userId}`)
+  const baseUrl = "https://world.org/mini-app";
+  const appId = "your_app_id";
+  const path = encodeURIComponent(`/invite?code=${userId}`);
 
-	return `${baseUrl}?app_id=${appId}&path=${path}`
+  return `${baseUrl}?app_id=${appId}&path=${path}`;
 }
 ```
 
@@ -55,26 +55,26 @@ function generateInviteLink(userId: string): string {
 Add share buttons at key moments in your user journey:
 
 ```typescript
-import { MiniKit } from '@worldcoin/minikit-js'
+import { MiniKit } from "@worldcoin/minikit-js";
 
 async function shareInvite() {
-	const inviteLink = generateInviteLink(currentUser.id)
+  const inviteLink = generateInviteLink(currentUser.id);
 
-	try {
-		await MiniKit.commandsAsync.share({
-			title: 'Join me on [Your App Name]!',
-			text: `I'm using this amazing mini app. Join me and we both get rewards! 🎁`,
-			url: inviteLink,
-		})
+  try {
+    await MiniKit.commandsAsync.share({
+      title: "Join me on [Your App Name]!",
+      text: `I'm using this amazing mini app. Join me and we both get rewards! 🎁`,
+      url: inviteLink,
+    });
 
-		// Track the share event
-		trackEvent('invite_link_created', {
-			user_id: currentUser.id,
-			share_method: 'native',
-		})
-	} catch (error) {
-		console.error('Share failed:', error)
-	}
+    // Track the share event
+    trackEvent("invite_link_created", {
+      user_id: currentUser.id,
+      share_method: "native",
+    });
+  } catch (error) {
+    console.error("Share failed:", error);
+  }
 }
 ```
 
@@ -85,20 +85,20 @@ Process referral codes when new users sign up:
 ```typescript
 // On app initialization
 function handleReferral() {
-	const urlParams = new URLSearchParams(window.location.search)
-	const refCode = urlParams.get('ref')
+  const urlParams = new URLSearchParams(window.location.search);
+  const refCode = urlParams.get("ref");
 
-	if (refCode && !currentUser.referredBy) {
-		// Credit the referrer
-		fetch('/api/process-referral', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				newUserId: currentUser.id,
-				referrerCode: refCode,
-			}),
-		})
-	}
+  if (refCode && !currentUser.referredBy) {
+    // Credit the referrer
+    fetch("/api/process-referral", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        newUserId: currentUser.id,
+        referrerCode: refCode,
+      }),
+    });
+  }
 }
 ```
 
@@ -108,27 +108,30 @@ Implement two-sided rewards that benefit both parties:
 
 ```typescript
 // api/process-referral.ts
-export async function processReferral(data: { newUserId: string; referrerCode: string }) {
-	const referrer = await getUserByCode(data.referrerCode)
-	if (!referrer) {
-		return { success: false, reason: 'invalid_referrer' }
-	}
+export async function processReferral(data: {
+  newUserId: string;
+  referrerCode: string;
+}) {
+  const referrer = await getUserByCode(data.referrerCode);
+  if (!referrer) {
+    return { success: false, reason: "invalid_referrer" };
+  }
 
-	// Credit both users
-	await Promise.all([
-		creditUser(referrer.id, {
-			type: 'referral_bonus',
-			amount: 100,
-			reason: 'Friend joined via your invite',
-		}),
-		creditUser(data.newUserId, {
-			type: 'signup_bonus',
-			amount: 50,
-			reason: 'Welcome bonus for joining via invite',
-		}),
-	])
+  // Credit both users
+  await Promise.all([
+    creditUser(referrer.id, {
+      type: "referral_bonus",
+      amount: 100,
+      reason: "Friend joined via your invite",
+    }),
+    creditUser(data.newUserId, {
+      type: "signup_bonus",
+      amount: 50,
+      reason: "Welcome bonus for joining via invite",
+    }),
+  ]);
 
-	return { success: true }
+  return { success: true };
 }
 ```
 
@@ -150,7 +153,15 @@ Specify a meta-tag image in the developer portal. If unset, the first showcase i
 
 - **Widget**: Your mini app can live on the phone's home screen. Prompt the user to add the mini app as a widget in the home screen.
 
-<img src="/images/docs/mini-apps/virality/widget.jpg" alt="Widget" width="300" />
+<div className="flex justify-center">
+  <img
+    src="/images/docs/mini-apps/virality/widget.jpg"
+    alt="Widget"
+    className="m-auto block"
+    width="260"
+    style={{ maxWidth: "260px", height: "auto" }}
+  />
+</div>
 Widget on iOS
 
 ## Design Best Practices
@@ -180,11 +191,11 @@ Monitor these key events to measure your viral loop performance:
 ```typescript
 // Essential tracking events
 const events = {
-	invite_link_created: { user_id, share_method },
-	invite_link_clicked: { ref_code, source },
-	signup_source_invite: { ref_code, new_user_id },
-	referral_reward_granted: { referrer_id, new_user_id, reward_amount },
-}
+  invite_link_created: { user_id, share_method },
+  invite_link_clicked: { ref_code, source },
+  signup_source_invite: { ref_code, new_user_id },
+  referral_reward_granted: { referrer_id, new_user_id, reward_amount },
+};
 ```
 
 ### Key Metrics Dashboard
@@ -204,7 +215,8 @@ Test these variables to optimize your viral loop:
 4. **Incentive Type**: Coins vs premium features vs exclusive content
 
 <Warning>
-Start with small reward amounts and scale up based on unit economics. Cap total lifetime rewards per user to control costs.
+  Start with small reward amounts and scale up based on unit economics. Cap
+  total lifetime rewards per user to control costs.
 </Warning>
 
 ## Next Steps
