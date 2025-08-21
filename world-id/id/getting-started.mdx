@@ -28,15 +28,36 @@ Once you create the application you'll need to create an incognito action.
 
 IDKit is available for multiple runtimes so you can collect proofs wherever your users are:
 
-| Platform                             | Docs                                  |
-| ------------------------------------ | ------------------------------------- |
-| Web (React)                          | [Integrate on the web](./web-react)   |
-| Web (Vanilla)                        | [Integrate on the web](./web-vanilla) |
-| Mobile (React Native, Swift, Kotlin) | [Integrate on mobile](./mobile)       |
+<table>
+  <thead>
+    <tr>
+      <th className="p-2 text-left align-middle">Platform</th>
+      <th className="p-2 text-left align-middle">Docs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td className="p-2 align-middle">Web (React)</td>
+      <td className="p-2 align-middle">
+        <a href="./web-react">Integrate on the web</a>
+      </td>
+    </tr>
+    <tr>
+      <td className="p-2 align-middle">Web (Vanilla)</td>
+      <td className="p-2 align-middle">
+        <a href="./web-vanilla">Integrate on the web</a>
+      </td>
+    </tr>
+    <tr>
+      <td className="p-2 align-middle">Mobile (React Native, Swift, Kotlin)</td>
+      <td className="p-2 align-middle">
+        <a href="./mobile">Integrate on mobile</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-<Note>
-Find a full list of supported SDKs [here](./libraries)
-</Note>
+<Note>Find a full list of supported SDKs [here](./libraries)</Note>
 
 Regardless of the platform the flow is the same:
 
@@ -46,26 +67,56 @@ Regardless of the platform the flow is the same:
 
 ```json title="ISuccessResult"
 {
-	"merkle_root": "0x1f38b57f3bdf96f05ea62fa68814871bf0ca8ce4dbe073d8497d5a6b0a53e5e0",
-	"nullifier_hash": "0x0339861e70a9bdb6b01a88c7534a3332db915d3d06511b79a5724221a6958fbe",
-	"proof": "0x063942fd7ea1616f17787d2e3374c1826ebcd2d41d2394...",
-	"verification_level": "orb"
+  "merkle_root": "0x1f38b57f3bdf96f05ea62fa68814871bf0ca8ce4dbe073d8497d5a6b0a53e5e0",
+  "nullifier_hash": "0x0339861e70a9bdb6b01a88c7534a3332db915d3d06511b79a5724221a6958fbe",
+  "proof": "0x063942fd7ea1616f17787d2e3374c1826ebcd2d41d2394...",
+  "verification_level": "orb"
 }
 ```
 
 <Warning>
-Retrieving the proof is not enough. You must verify the proof in Step 3 to prevent replay attacks. Without verification, your application could be vulnerable to malicious actors reusing old proofs.
+  Retrieving the proof is not enough. You must verify the proof in Step 3 to
+  prevent replay attacks. Without verification, your application could be
+  vulnerable to malicious actors reusing old proofs.
 </Warning>
 
 # Step 3: Verify the proof
 
 Choose where you want to verify proofs:
 
-| Target            | Recommended when                                                    | Docs                          |
-| ----------------- | ------------------------------------------------------------------- | ----------------------------- |
-| Cloud verifier    | You already maintain a backend server and prefer a simple REST call | [Verify via REST](./cloud)    |
-| On-chain verifier | You need trust-minimized verification inside a smart contract       | [Verify on-chain](./on-chain) |
+<table>
+  <thead>
+    <tr>
+      <th className="p-2 text-left align-middle">Target</th>
+      <th className="p-2 text-left align-middle">Recommended when</th>
+      <th className="p-2 text-left align-middle">Docs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td className="p-2 align-middle">Cloud verifier</td>
+      <td className="p-2 align-middle">
+        You already maintain a backend server and prefer a simple REST call
+      </td>
+      <td className="p-2 align-middle">
+        <a href="./cloud">Verify via REST</a>
+      </td>
+    </tr>
+    <tr>
+      <td className="p-2 align-middle">On-chain verifier</td>
+      <td className="p-2 align-middle">
+        You need trust-minimized verification inside a smart contract
+      </td>
+      <td className="p-2 align-middle">
+        <a href="./on-chain">Verify on-chain</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <Note>
-Cloud verifications from the Developer portal automatically handle sybil-resistance for you, ensuring that a user cannot perform the same action more than a set amount. If you want to verify proofs on-chain you need to handle this, more details [here](./on-chain)
+  Cloud verifications from the Developer portal automatically handle
+  sybil-resistance for you, ensuring that a user cannot perform the same action
+  more than a set amount. If you want to verify proofs on-chain you need to
+  handle this, more details [here](./on-chain)
 </Note>

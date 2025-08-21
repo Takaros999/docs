@@ -65,7 +65,7 @@
           },
           {
             "group": "Technical Reference",
-            "openapi": "/openapi/world-miniapps.json",
+            "openapi": "openapi/world-miniapps.json",
             "pages": [
               "mini-apps/reference/init",
               "mini-apps/reference/api",
@@ -206,11 +206,6 @@
               "world-chain/developers/world-chain-contracts",
               "world-chain/developers/fees",
               "world-chain/developers/evm-equivalence",
-              {
-                "page": "Scaling World Chain",
-                "href": "https://world.org/blog/engineering/finding-scalable-home-for-worldcoin",
-                "external": true
-              },
               "world-chain/developers/grants"
             ]
           },
@@ -243,49 +238,8 @@
             ]
           },
           {
-            "group": "Status Page",
-            "pages": [
-              {
-                "page": "World Chain Mainnet",
-                "href": "https://worldchain-mainnet-status.alchemy.com/",
-                "external": true
-              },
-              {
-                "page": "World Chain Sepolia Testnet",
-                "href": "https://worldchain-sepolia-status.alchemy.com/",
-                "external": true
-              }
-            ]
-          },
-          {
-            "group": "Others",
-            "pages": [
-              {
-                "page": "Brand Kit",
-                "href": "https://world.org/press",
-                "external": true
-              },
-              {
-                "page": "World Whitepaper",
-                "href": "https://whitepaper.world.org/",
-                "external": true
-              }
-            ]
-          },
-          {
-            "group": "Legal",
-            "pages": [
-              {
-                "page": "Terms of Service",
-                "href": "https://vault.pactsafe.io/s/8a18d792-fd76-44db-9b92-b0bb7981c248/legal.html#contract-byutjvtyt",
-                "external": true
-              },
-              {
-                "page": "Privacy Policy",
-                "href": "https://vault.pactsafe.io/s/8a18d792-fd76-44db-9b92-b0bb7981c248/legal.html#contract-s1ytru6kk",
-                "external": true
-              }
-            ]
+            "group": "Further Reading",
+            "pages": ["world-chain/resources"]
           }
         ]
       }
@@ -293,9 +247,9 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Discord",
-          "href": "https://discord.gg/worldcoin",
-          "icon": "discord"
+          "anchor": "Telegram",
+          "href": "https://t.me/worlddevelopersupport",
+          "icon": "telegram"
         },
         {
           "anchor": "GitHub",
@@ -328,6 +282,18 @@
       "github": "https://github.com/worldcoin",
       "discord": "https://discord.gg/worldcoin"
     }
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
   },
   "redirects": [
     { "source": "/apps", "destination": "https://world.org/apps" },
