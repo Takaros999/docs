@@ -32,9 +32,7 @@ Deep-link (opens World App directly if installed)
 
 `worldapp://mini-app?app_id={app_id}&path={path}`
 
-<Note>
-  Need to break out of an in-app web-view? Append open_out_of_window=true.
-</Note>
+To force opening in the device browser instead of the native webview, append `open_out_of_window=true` to the URL (works for both universal and deep links).
 
 ### 2. Generate Share Links
 

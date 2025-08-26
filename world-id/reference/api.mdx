@@ -66,11 +66,6 @@ Enables you to verify a World ID proof for a **Cloud action.** To ensure sybil-r
   maximum value is 604800 (7 days). Defaults to 7200 (2 hours).
 </ParamField>
 
-### Possible Responses
-
-- `200 OK` - The proof was successfully verified.
-- `400 Bad Request` - The proof was invalid or the user has already verified for this action.
-
 <CodeGroup title="Request">
 ```bash cURL
 curl -X POST "https://developer.worldcoin.org/api/v2/verify/{app_id}" \
@@ -107,6 +102,11 @@ fetch("https://developer.worldcoin.org/api/v2/verify/{app_id}", {
 ```
 
 </CodeGroup>
+
+### Possible Responses
+
+- `200 OK` - The proof was successfully verified.
+- `400 Bad Request` - The proof was invalid or the user has already verified for this action.
 
 ### Response Examples
 
@@ -170,13 +170,8 @@ fetch("https://developer.worldcoin.org/api/v2/verify/{app_id}", {
 
 ## Get Action Metadata
 
-<CodeGroup>
-  ```bash POST /api/v1/precheck/{app_id}
-  ```
-</CodeGroup>
-
-<ParamField path="app_id" type="string" required>
-  Your app ID from the Developer Portal
+<ParamField path="method" type="GET">
+  https://developer.worldcoin.org/api/v1/precheck/{app_id}
 </ParamField>
 
 Enables fetching information about a particular app to determine eligibility for verification. This endpoint is also used by the World ID Kiosk, Sign in with World ID, and World App to show metadata about the action being verified. This endpoint will only return information for active actions.
@@ -273,29 +268,68 @@ fetch(`/api/v1/precheck/${appId}`, {
   body="can_user_verify"
   type="'yes' | 'no' | 'on-chain' | 'undetermined'"
 >
-  If the user is eligible to verify for this action. - `"yes"`: The user has not
-  reached the maximum number of verifications for this action based on the
-  `nullifier_hash` provided. Always returned when `is_sign_in` is `true`. -
-  `"no"`: The user has reached the maximum number of verifications for this
-  action based on the `nullifier_hash` provided. - `"undetermined"`: A
-  nullifier_hash was not provided, so the user's eligibility cannot be
-  determined. - `"on-chain"`: The app is configured for **On-Chain**
-  verifications, so the user's eligibility cannot be determined. Verification
-  eligibility is determined solely by the application's smart contract.
-</ParamField>
+  If the user is eligible to verify for this action.
+
+<ul>
+  <li>
+    <code>"yes"</code>: The user has not reached the maximum number of
+    verifications for this action based on the <code>nullifier_hash</code>
+    provided. Always returned when <code>is_sign_in</code> is
+    <code>true</code>.
+  </li>
+  <li>
+    <code>"no"</code>: The user has reached the maximum number of verifications
+    for this action based on the <code>nullifier_hash</code> provided.
+  </li>
+  <li>
+    <code>"undetermined"</code>: A <code>nullifier_hash</code> was not
+    provided, so the user's eligibility cannot be determined.
+  </li>
+  <li>
+    <code>"on-chain"</code>: The app is configured for <strong>On-Chain</strong>
+    verifications, so the user's eligibility cannot be determined. Verification
+    eligibility is determined solely by the application's smart contract.
+  </li>
+</ul>
+  </ParamField>
 
 <ParamField body="action" type="object">
-  Information about the action being verified. - `name`: The action's
-  human-readable name as configured in the Developer Portal. - `action`: The
-  action identifier as configured in the Developer Portal. Typically a slugified
-  version of the action's name. - `description`: The action's description as
-  configured in the Developer Portal. - `max_verifications`: The maximum number
-  of verifications allowed for this action. Will be `0` if the action is
-  configured for unlimited verifications. - `max_accounts_per_user`: The maximum
-  number of accounts allowed per user for Sign in with World ID. Will always be
-  `1`. - `external_nullifier`: The action's external nullifier. **Intended for
-  internal use only.** - `status`: Will return `active` if the action is active,
-  otherwise will return `inactive`. - `__typename`: Always returns `action`.
+  Information about the action being verified.
+
+  <ul>
+    <li>
+      <code>name</code>: The action's human-readable name as configured in the
+      Developer Portal.
+    </li>
+    <li>
+      <code>action</code>: The action identifier as configured in the Developer
+      Portal. Typically a slugified version of the action's name.
+    </li>
+    <li>
+      <code>description</code>: The action's description as configured in the
+      Developer Portal.
+    </li>
+    <li>
+      <code>max_verifications</code>: The maximum number of verifications
+      allowed for this action. Will be <code>0</code> if the action is
+      configured for unlimited verifications.
+    </li>
+    <li>
+      <code>max_accounts_per_user</code>: The maximum number of accounts allowed
+      per user for Sign in with World ID. Will always be <code>1</code>.
+    </li>
+    <li>
+      <code>external_nullifier</code>: The action's external nullifier.
+      <strong>Intended for internal use only.</strong>
+    </li>
+    <li>
+      <code>status</code>: Will return <code>active</code> if the action is
+      active, otherwise will return <code>inactive</code>.
+    </li>
+    <li>
+      <code>__typename</code>: Always returns <code>action</code>.
+    </li>
+  </ul>
 </ParamField>
 
 ### Response Examples
@@ -365,7 +399,9 @@ fetch(`/api/v1/precheck/${appId}`, {
 
 ## Get JWK Keys
 
-<CodeGroup>```bash GET /api/v1/jwks ```</CodeGroup>
+<ParamField path="method" type="GET">
+  https://developer.worldcoin.org/api/v1/jwks
+</ParamField>
 
 This endpoint lets you retrieve the JWKs (public keys) used to verify the signature on JSON web tokens that authenticate a verification request from the Developer Portal. This verification method is only used if you are using the **Hosted page user interface.**
 
@@ -412,7 +448,9 @@ Authorization: Bearer $API_KEY
 
 ### GraphQL
 
-<CodeGroup>```bash POST /v1/graphql ```</CodeGroup>
+<ParamField path="method" type="POST">
+  https://developer.worldcoin.org/api/v1/graphql
+</ParamField>
 
 Interaction with the Developer Portal API is mostly done through a GraphQL endpoint, which enables retrieving information and interacting with any of the API objects. You can read more about [queries](https://hasura.io/docs/latest/graphql/core/api-reference/graphql-api/query/) and [mutations](https://hasura.io/docs/latest/graphql/core/api-reference/graphql-api/mutation/) for GraphQL to help you construct your query.
 
